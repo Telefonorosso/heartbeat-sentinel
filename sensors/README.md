@@ -1,0 +1,68 @@
+# SDR Signal Check One-Liners
+
+This directory contains minimal RTL-SDR probes used to sense the physical RF world and determine whether critical broadcast / nav / air / cellular systems are alive.
+
+These are *existence tests*, not decoders.  
+They answer: **"Is the real world still transmitting?"**
+
+> No network trust. No cached UI trust.  
+> **Trust physics.**
+
+---
+
+## FM Broadcast
+
+Detect strong carriers in FM band.
+
+```bash
+rtl_power -f 87.5M:108M:200k -i 1 -1 - \
+| awk -F, '{if ($6>-60) c++} END{print (c>=5?"FM OK":"FM LOW/NO")}'
+
+## DVB-T / DVB-T2 Multiplexes (EU / IT)
+
+Wide OFDM energy lumps across UHF.
+
+```bash
+rtl_power -f 474M:694M:1M -i 1 -1 - \
+| awk -F, '{if ($6>-65) c[int(($1-474e6)/8e6)]++} END{for(i in c) if(c[i]>5) ok++} END{print (ok>=2?"DVBT OK":"DVBT LOW/NO")}'
+
+## GSM Cell Tower Beacons (SDR)
+
+GSM-900 (EU)
+
+```bash
+rtl_power -f 935M:960M:200k -i 2 -1 - \
+| awk -F, '{if ($6>-70) c++} END{print (c>=3?"GSM900 OK":"GSM900 LOW/NO")}'
+
+GSM-1800
+
+```bash
+rtl_power -f 1805M:1880M:200k -i 2 -1 - \
+| awk -F, '{if ($6>-70) c++} END{print (c>=3?"GSM1800 OK":"GSM1800 LOW/NO")}'
+
+## ADS-B RF Activity (1090 MHz)
+
+Not decoding — just checking the RF noise floor bump.
+
+```bash
+rtl_power -f 1090M:1090M:50k -i 2 -1 - \
+| awk -F, '{if ($6>-70) ok=1} END{print (ok?"ADS-B RF OK":"NO ADS-B RF")}'
+
+## GPS L1 Carrier (≈1575.42 MHz)
+
+RF presence check (not GNSS lock).
+
+```bash
+rtl_power -f 1573M:1587M:200k -i 3 -1 - \
+| awk -F, '{s+=$6; n++} END{print ((s/n)>-75?"GPS L1 RF OK":"NO GPS RF")}'
+
+## APRS RF (Ham Packet)
+
+EU: 144.800 MHz
+US: 144.390 MHz (adjust as needed)
+
+```bash
+rtl_power -f 144.8M:144.8M:25k -i 3 -1 - \
+| awk -F, '{if ($6>-70) ok=1} END{print (ok?"APRS OK":"NO APRS")}'
+
+
