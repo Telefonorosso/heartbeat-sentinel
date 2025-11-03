@@ -2,9 +2,6 @@
 
 This directory contains minimal RTL-SDR probes used to sense the physical RF world and determine whether critical broadcast / nav / air / cellular systems are alive.
 
-These are *existence tests*, not decoders.  
-They answer: **"Is the real world still transmitting?"**
-
 ---
 
 ## FM Broadcast
