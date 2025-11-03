@@ -1,0 +1,83 @@
+= Minimal System Packages (APT)
+
+This document lists the minimal Debian/Ubuntu/Raspberry Pi OS packages required to operate the core sensing functions of the system.  
+Packages are limited to essential radio utilities, terminal tools, and serial modem support.
+
+== Base System Update
+
+[source,bash]
+----
+sudo apt-get update
+sudo apt-get upgrade -y
+----
+
+== Required SDR Utilities
+
+RTL-SDR tools for carrier scanning and power spectral sampling.
+
+[source,bash]
+----
+sudo apt-get install -y rtl-sdr
+----
+
+== Analysis Utilities
+
+`awk` and `coreutils` are included by default on most Debian-based systems.  
+`jq` is required only if exporting JSON logs.
+
+[source,bash]
+----
+sudo apt-get install -y jq
+----
+
+== Modem / Serial Support
+
+For AT command communication with USB modems.
+
+[source,bash]
+----
+sudo apt-get install -y usb-modeswitch modemmanager
+----
+
+Note: `minicom` or `screen` are optional for manual testing and not required for automated scripts.
+
+== Networking Tools
+
+Used only for basic reachability checks.
+
+[source,bash]
+----
+sudo apt-get install -y iputils-ping dnsutils
+----
+
+== Optional but Recommended (Low Overhead)
+
+Small helpers that do not materially increase footprint:
+
+[source,bash]
+----
+sudo apt-get install -y netcat-openbsd wget curl
+----
+
+These assist in simple health probes and log uploads (if the user enables external reporting).
+
+== Not Required
+
+The following are *not* needed for base operation and should be avoided on constrained hardware unless specifically required:
+
+* GNURadio
+* SDRangel / GQRX
+* Full desktop environments
+* Python scientific stacks (unless using the optional AI module)
+
+== Summary
+
+Minimal install footprint:
+
+* `rtl-sdr` (core)
+* `jq` (log handling)
+* `usb-modeswitch`, `modemmanager` (modem)
+* `ping`, `dig` (network sanity)
+
+This configuration supports core RF checks, GSM registration tests via AT commands, and lightweight local logging without unnecessary overhead.
+
