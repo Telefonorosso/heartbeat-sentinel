@@ -42,8 +42,6 @@ Diagonal "—" = same indicator.
 | 5 | Extremely unlikely coincidence → **possible systemic collapse**
 |===
 
-> *Truth emerges from independent failures persisting over time.*
-
 == Indicator Legend
 
 [cols="1,3",options="header"]
@@ -51,7 +49,7 @@ Diagonal "—" = same indicator.
 | Indicator | Meaning
 
 | Internet | DNS + multi-continent ping + backbone heartbeat
-| Power | Local AC sentinel / UPS shadow / loss inference
+| Power | Local AC sentinel
 | Wi-Fi SSIDs | Nearby access points vs local power
 | FM | FM broadcast carrier presence
 | DVB-T | Digital TV OFDM multiplex energy
@@ -61,26 +59,3 @@ Diagonal "—" = same indicator.
 | GNSS | GPS/GNSS lock or L1 RF carrier
 | APRS | Ham radio packet activity
 |===
-
-== Operational Logic
-
-* No single signal → **never** panic
-* Noise dies fast — **persistence matters**
-* Cross-domain failure = truth signal
-* Radio + space + aviation + internet down → **civilization heartbeat flatline**
-
-== Rule of Thumb
-
-[cols="2,3",options="header"]
-|===
-| Condition | Meaning
-
-| Few isolated 2-scores | Normal noise / local glitch
-| ≥3 events scoring ≥3 | Regional trouble
-| ≥2 events scoring ≥4 + persistence | Serious infra anomaly
-| ≥5 domains silent across radio + GNSS + ADS-B + Internet | **Critical: world heartbeat silent**
-|===
-
-== Motto
-
-> ***If the RF world goes silent, nothing else matters.***
