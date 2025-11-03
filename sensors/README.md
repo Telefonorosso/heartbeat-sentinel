@@ -5,9 +5,6 @@ This directory contains minimal RTL-SDR probes used to sense the physical RF wor
 These are *existence tests*, not decoders.  
 They answer: **"Is the real world still transmitting?"**
 
-> No network trust. No cached UI trust.  
-> **Trust physics.**
-
 ---
 
 ## FM Broadcast
