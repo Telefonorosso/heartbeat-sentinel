@@ -26,7 +26,7 @@ This project asks one simple question:
 
 ## Status
 
-`Work in progress — open build`
+Work in progress — open build
 
 ### Core Signals Monitored
 
