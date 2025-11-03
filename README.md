@@ -1,3 +1,4 @@
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-experimental-orange)
 ![Build](https://img.shields.io/badge/build-WIP-lightgrey)
 ![Focus](https://img.shields.io/badge/focus-resilience-blue)
