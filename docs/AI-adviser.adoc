@@ -1,4 +1,4 @@
-= Local AI Component — Concise Design Notes
+= Local AI Component
 :icons: unicode
 
 == Purpose
