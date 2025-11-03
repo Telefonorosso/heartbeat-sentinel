@@ -1,0 +1,225 @@
+= GSM / Cellular Modem AT Command Reference
+:icons: unicode
+:toc: macro
+:toclevels: 2
+
+Minimal AT command set to verify **network availability, attach status, SIM health, and RF presence** without requiring credit or a data plan.
+
+This supports the *GSM Attach* sensor of the **Civilization Heartbeat Sentinel**.
+
+toc::[]
+
+== Basic Test — Modem Alive
+
+Verify serial link + device responsiveness.
+
+[source,text]
+----
+AT
+OK
+----
+
+If `OK` not returned → check USB/serial config.
+
+== SIM Status
+
+[source,text]
+----
+AT+CPIN?
+----
+
+Expected results:
+
+|===
+| Response | Meaning
+
+| +CPIN: READY | SIM present & unlocked ✅
+| +CPIN: SIM PIN | PIN required
+| +CPIN: SIM PUK | PUK locked
+| ERROR | No SIM / not detected
+|===
+
+== Network Registration (Core)
+
+[source,text]
+----
+AT+CREG?
+----
+
+Codes:
+
+|===
+| Value | Meaning
+
+| 0 | Not registered, not searching
+| 1 | **Registered (home)** ✅
+| 2 | Searching
+| 3 | Denied
+| 5 | **Registered (roaming)** ✅
+|===
+
+Example success:
+
+[source,text]
+----
++CREG: 0,1
+----
+
+
+== Packet Service Registration (Data Attach)
+
+[source,text]
+----
+AT+CGREG?
+----
+
+Same state codes as `+CREG`.
+
+== Scan Available Networks (Optional Heavy Scan)
+
+Used to verify **cell infrastructure exists** even without SIM access.
+
+[source,text]
+----
+AT+COPS=?
+----
+
+Returns visible carriers.
+
+== Operator Check (If Registered)
+
+[source,text]
+----
+AT+COPS?
+----
+
+Example:
+
++COPS: 0,0,"Vodafone"
+
+
+If blank → no usable network.
+
+== Signal Strength (RSSI)
+
+[source,text]
+----
+AT+CSQ
+----
+
+Interpretation:
+
+|===
+| RSSI | Meaning
+
+| 31 | Excellent
+| 20–30 | Good
+| 10–19 | Usable-ish
+| 0–9 | Very weak
+| 99 | **No signal / unknown** ⚠️
+|===
+
+> For this project we only need **signal exists**, not quality.
+
+== System Info (Optional)
+
+[source,text]
+----
+AT+SYSINFO
+----
+
+Useful but not required.
+
+== Modem Identity (IMEI)
+
+[source,text]
+----
+AT+CGSN
+----
+
+Verifies real device, not ghost port.
+
+== PDP Context Check (Optional Stack Sanity)
+
+[source,text]
+----
+AT+CGDCONT?
+----
+
+== (Optional) SMS Stack Check
+
+Does *not* consume credit unless sending.
+
+[source,text]
+----
+AT+CSMS=1
+AT+CMGF=1
+AT+CSCA?
+----
+
+Used for optional emergency path.
+
+== Commands We Avoid
+
+We **do not** need:
+
+* Voice calls (ATD)
+* PPP / data session
+* SMS send loops
+
+Goal = **verify civilization heartbeat**, not use network.
+
+== Sentinel Logic
+
+=== Success Case (Network Alive)
+* `+CPIN: READY`
+* `+CREG` = 1 or 5
+
+OR (fallback)
+* `AT+COPS=?` returns operators
+
+=== High-Signal Danger Case
+* `AT` works (modem alive)
+* `CSQ = 99`
+* `CREG = 0 or 3`
+* `COPS=?` empty
+* **AND** SDR sees no GSM beacons
+
+→ **Cellular infrastructure silence** (rare event)
+
+== Example Test Script Skeleton (Pseudo-Shell)
+
+[source,bash]
+----
+echo "AT+CPIN?" > /dev/ttyUSB2
+sleep 1
+grep "READY" modem.log && echo "SIM OK"
+
+echo "AT+CREG?" > /dev/ttyUSB2
+sleep 1
+grep -E ": 0,[15]" modem.log && echo "NET OK"
+
+echo "AT+CSQ" > /dev/ttyUSB2
+sleep 1
+grep -v "99" modem.log && echo "RF SEEN"
+
+echo "AT+COPS=?" > /dev/ttyUSB2
+----
+
+> Adjust `/dev/ttyUSB2` as needed.  
+Use `stty -F /dev/ttyUSB2 115200` if required.
+
+== Notes
+
+* Pair modem test with SDR GSM beacon scan
+* No credit/SIM required to detect infrastructure
+* Seeing towers ≠ being allowed to attach
+
+== Philosophy
+
+> **Is the network dead, or just my subscription?**
+
+Civilization heartbeat ≠ “my SIM works.”  
+It = **infrastructure is transmitting**.
+
+
