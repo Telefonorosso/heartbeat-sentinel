@@ -1,0 +1,34 @@
+= Distributed & Decentralized Deployment Notes
+
+This document outlines considerations for running multiple sentinel nodes in a distributed, peer-referenced configuration. The goal is not central control, but cross-validation and resilience.
+
+== General Idea
+
+Several independent nodes operate in different physical locations and exchange a minimal health summary. Each node remains sovereign: it senses locally, evaluates locally, and only shares compact status signals. The network is a cooperation layer, not a dependency.
+
+== Benefits
+
+A distributed layout strengthens confidence in anomaly detection.  
+If multiple nodes report consistent patterns, the likelihood of a real external event increases. If one node diverges, it may indicate a local disturbance or sensor fault rather than systemic failure.
+
+== Communication Model
+
+Nodes periodically broadcast a short signed message containing their timestamped "local health vector" (summary only, not raw RF samples). Transport can be over existing internet links, but should degrade gracefully to opportunistic channels (e.g. intermittent LoRa or ham packet).
+
+Messages are stored locally; missing reports do not block operation.  
+Verification logic prefers majority agreement when available but defaults to independent evaluation.
+
+== Trust and Identity
+
+Each node generates its own keypair. There is no central authority; trust derives from cryptographic identity and history of consistent behavior. Quorum decisions are advisory, never mandatory. The system must remain functional even with zero peers.
+
+== Failure and Partitioning
+
+Network absence is not treated as proof of outage.  
+Nodes assume partition first, outage second.  
+Remote data is a bonus signal, not a requirement.  
+Local sensing always takes priority.
+
+== Summary
+
+A decentralized version improves confidence when multiple independent observers detect similar conditions, but the architecture must avoid creating single points of failure or reliance on continuous connectivity. The system remains fundamentally local; distributed operation adds corroboration rather than control.
