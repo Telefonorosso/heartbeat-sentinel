@@ -1,0 +1,131 @@
+= Local AI Analysis Module (Design Notes)
+:icons: unicode
+
+This document describes the potential use of a local AI model in the system.  
+The purpose of this module is **analysis and interpretation**, not core sensing.  
+All primary logic remains deterministic and rule-based.
+
+== Objective
+
+The AI component is intended to assist in interpreting multi-signal anomalies and providing:
+
+* correlation across heterogeneous inputs
+* contextual explanation
+* classification of event types
+* prioritization of hypotheses
+* human-readable diagnostic summaries
+
+The AI module does **not** make shutdown or emergency decisions.  
+It generates advisory context for the operator.
+
+== Inputs
+
+Structured telemetry from sensors, including:
+
+* binary probe results (e.g., signal present / absent)
+* confidence scores
+* historical trend values
+* time persistence markers
+* environmental metadata when available (optional)
+
+Format target: `JSONL` time series.
+
+== Outputs
+
+* structured reasoning summary
+* anomaly classification label
+* recommended follow-up checks (optional)
+* uncertainty estimate
+
+Example labels (non-exhaustive):
+
+* local connectivity loss
+* regional broadcast anomaly
+* GNSS reception degradation
+* multi-domain outage pattern
+* likely sensor fault
+* ambiguous state (needs more data)
+
+== Model Type
+
+Requirements:
+
+* must run locally
+* low memory footprint
+* deterministic resource usage
+* able to reason over structured logs
+
+Possible classes:
+
+* small transformer model
+* gradient-boosted tree model (as fallback)
+* hybrid: rules + classifier
+
+The system should function without the AI model.  
+The model is an enhancement, not a dependency.
+
+== Pipeline Overview
+
+. Data collection (sensor modules)
+. Normalization + feature extraction
+. Store time-series slice (sliding window)
+. Pass structured context to AI module
+. Receive classification + explanation
+. Annotate system log and dashboard
+
+== Temporal Reasoning
+
+The model evaluates not only point-in-time values but also:
+
+* change over time
+* duration of anomaly
+* recurrence patterns
+
+This reduces false positives from brief disturbances.
+
+== Training Considerations
+
+Two approaches:
+
+* rule-guided synthetic data for initial behavior
+* incremental training / fine-tuning on system logs
+
+Ground truth comes from deterministic logic and known events.  
+The model is not trained on panic scenarios or speculative outputs.
+
+== Security and Isolation
+
+* no cloud inference
+* no outbound network calls
+* sandboxed execution
+* model input limited to local telemetry only
+
+== Failure Modes
+
+If the model fails, crashes, or produces invalid output:
+
+* system falls back to deterministic logic
+* logs flagged as "AI unavailable"
+* no operational impairment
+
+== Exclusions
+
+The AI module does **not** perform:
+
+* sensor control
+* RF decoding
+* emergency triggering
+* autonomous actions
+* external communication
+
+Its role is analysis only.
+
+== Status
+
+Phase: concept definition.  
+Core system must be operational before AI integration.
+
+== Summary
+
+The AI component is an optional analysis layer that provides structured interpretation and context to sensor results. It runs locally, does not replace deterministic logic, and its failure does not compromise system operation. The goal is improved diagnostic clarity, not autonomy.
+
