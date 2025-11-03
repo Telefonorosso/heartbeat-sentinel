@@ -74,10 +74,6 @@ Amateur radio | APRS / ham packet presence |
 Ideas and data welcome —  
 this project is about **citizen resilience engineering**.
 
-## License
-
-MIT — you control your tools.
-
 ### Civil Ethics Notice
 
 This project exists to promote **civil resilience, transparency and peace**.  
