@@ -3,8 +3,6 @@
 
 Minimal AT command set to verify **network availability, attach status, SIM health, and RF presence** without requiring credit or a data plan.
 
-This supports the *GSM Attach* sensor of the **Civilization Heartbeat Sentinel**.
-
 == Basic Test — Modem Alive
 
 Verify serial link + device responsiveness.
