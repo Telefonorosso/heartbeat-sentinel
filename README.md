@@ -46,8 +46,6 @@ Amateur radio | APRS / ham packet presence |
 - **Edge-resilient**: works in total internet outage
 - *Technological existentialism with engineering discipline*
 
----
-
 ## Repository Contents
 
 - `/sensors/` — pseudocode for each signal module
@@ -56,13 +54,9 @@ Amateur radio | APRS / ham packet presence |
 - `LICENSE` — open for community
 - This README — story + motivation + technical scope
 
----
-
 ## Status
 
 `⚙️ Work in progress — open build`
-
----
 
 ## Roadmap
 
@@ -75,20 +69,14 @@ Amateur radio | APRS / ham packet presence |
 - [ ] Publish Medium intro
 - [ ] Submit to Hackaday links
 
----
-
 ## Contributing
 
 Ideas and data welcome —  
 this project is about **citizen resilience engineering**.
 
----
-
 ## License
 
 MIT — you control your tools.
-
----
 
 ### Civil Ethics Notice
 
