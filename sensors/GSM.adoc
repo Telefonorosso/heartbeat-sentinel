@@ -113,8 +113,6 @@ Interpretation:
 | 99 | **No signal / unknown** 
 |===
 
-> For this project we only need **signal exists**, not quality.
-
 == System Info (Optional)
 
 [source,text]
@@ -151,13 +149,4 @@ AT+CMGF=1
 AT+CSCA?
 ----
 
-Used for optional emergency path.
-
-== Commands We Avoid
-
-We **do not** need:
-
-* Voice calls (ATD)
-* PPP / data session
-* SMS send loops
-
+Used for optional emergency comms.
