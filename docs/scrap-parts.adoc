@@ -1,4 +1,4 @@
-This system is designed to operate using easily available and often repurposed equipment rather than specialized hardware. The intention is to keep the platform accessible, reproducible; The objective is reliable detection of broadcast continuity, not laboratory-grade measurement.
+This system is designed to operate using easily available and often repurposed equipment rather than specialized hardware. The intention is to keep the platform accessible & reproducible; The objective is reliable detection of broadcast continuity, not laboratory-grade measurement.
 
 == Typical Reused Components
 
@@ -11,16 +11,6 @@ Older 3G/2G USB sticks (e.g., early Vodafone or Huawei models) still respond to 
 *Obsolete Wi-Fi extender or access point*  
 Used as a passive indicator of local power state. If the extender disappears from scans while external SSIDs remain, the system can infer a localized outage rather than a wide-area event.
 
-*Older Raspberry Pi*  
+*Old Raspberry Pi*  
 A Pi from previous generations is sufficient. Baseline requirements: USB host, modest CPU, stable storage. No GPU or modern performance features are necessary.  
 A Pi 2/3 or similar SBC handles periodic scans and lightweight processing reliably.
-
-== Practical Notes
-
-Power draw remains low with reused consumer devices. USB peripherals provide basic RF inputs across several bands without additional RF front-ends. Hardware wear or RF limitations are mitigated by averaging, persistence checks, and redundant indicators.
-
-New components can be added, but the baseline design avoids assuming access to specialized radios, calibrated antennas, or current-generation embedded platforms.
-
-== Summary
-
-The system intentionally demonstrates that useful physical-layer awareness can be achieved using surplus consumer equipment. Reuse aligns with accessibility, resilience, and experimentation, while maintaining sufficient performance for continuity sensing objectives.
