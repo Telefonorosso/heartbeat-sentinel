@@ -60,7 +60,7 @@ Example success:
 ----
 
 
-== Packet Service Registration (Data Attach)
+== Packet Service Registration 
 
 [source,text]
 ----
@@ -69,7 +69,7 @@ AT+CGREG?
 
 Same state codes as `+CREG`.
 
-== Scan Available Networks (Optional Heavy Scan)
+== Scan Available Networks
 
 Used to verify **cell infrastructure exists** even without SIM access.
 
@@ -80,7 +80,7 @@ AT+COPS=?
 
 Returns visible carriers.
 
-== Operator Check (If Registered)
+== Operator Check
 
 [source,text]
 ----
@@ -94,7 +94,7 @@ Example:
 
 If blank → no usable network.
 
-== Signal Strength (RSSI)
+== Signal Strength
 
 [source,text]
 ----
@@ -131,7 +131,7 @@ AT+CGSN
 
 Verifies real device, not ghost port.
 
-== PDP Context Check (Optional Stack Sanity)
+== PDP Context Check
 
 [source,text]
 ----
