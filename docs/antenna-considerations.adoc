@@ -1,0 +1,58 @@
+= Antenna Considerations
+
+This system prioritizes signal presence over precision. Antenna requirements are therefore modest. The objective is continuous reception of broad infrastructure signals across multiple services, using simple and widely available antennas.
+
+== General Principles
+
+* A broadband or compromise antenna is sufficient for detection.
+* Absolute performance is not critical; consistency is.
+* Small indoor antennas are acceptable where reception is stable.
+* Placement affects results more than antenna type in most cases.
+* Avoid highly directional antennas, as the goal is ambient sensing.
+
+The system values stable baselines and anomaly detection rather than maximum gain.
+
+== Practical Antenna Types
+
+*Stock RTL-SDR telescopic antenna*  
+Adequate for FM, DVB-T noise, GSM beacon presence, and ADS-B energy checks. Extend length to ~1/4 wavelength for band of interest when possible, but broad compromise positioning is acceptable.
+
+*Simple wire or whip antennas*  
+A short wire (~10–50 cm) connected to the SDR input can suffice indoors for FM and DVB-T detection.  
+Not optimized, but consistent enough for threshold measurements.
+
+*Small ADS-B whip (if available)*  
+Useful but not required. The system does not decode ADS-B packets at this stage; only energy detection is needed.
+
+*No external antenna for GNSS*  
+GNSS lock check should be handled by an external GPS receiver module, not the SDR. The SDR only observes L-band noise characteristics. If using a GNSS module, a small ceramic patch or puck antenna is adequate.
+
+== Placement Considerations
+
+Indoor placement near a window typically provides stable baselines. Avoid:
+
+* locations immediately next to large metal objects
+* directly behind reinforced concrete
+* placement near switching power supplies or Wi-Fi routers, if avoidable
+
+The priority is repeatability rather than optimal SNR.
+
+== Environmental Variability
+
+Weak signals may fluctuate with:
+
+* building construction
+* time of day (ADS-B aircraft density)
+* weather and seasonal foliage (minor effect)
+* nearby consumer electronics
+
+To manage this, thresholds should be learned from local conditions rather than assumed absolute values.
+
+== Coax and Connectors
+
+For short runs (<1 m), stock cables are adequate. Low-loss coax is not required. Adapters may introduce small loss but remain acceptable given the detection-only goal.
+
+== Summary
+
+A functional antenna arrangement for this project does not require specialized hardware. Stock DVB-T antennas, simple whips, or short wires provide sufficient capability. Stable placement and local baseline calibration are more important than antenna gain.
+
