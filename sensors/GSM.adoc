@@ -1,13 +1,9 @@
 = GSM / Cellular Modem AT Command Reference
 :icons: unicode
-:toc: macro
-:toclevels: 2
 
 Minimal AT command set to verify **network availability, attach status, SIM health, and RF presence** without requiring credit or a data plan.
 
 This supports the *GSM Attach* sensor of the **Civilization Heartbeat Sentinel**.
-
-toc::[]
 
 == Basic Test — Modem Alive
 
@@ -33,7 +29,7 @@ Expected results:
 |===
 | Response | Meaning
 
-| +CPIN: READY | SIM present & unlocked ✅
+| +CPIN: READY | SIM present & unlocked 
 | +CPIN: SIM PIN | PIN required
 | +CPIN: SIM PUK | PUK locked
 | ERROR | No SIM / not detected
@@ -52,10 +48,10 @@ Codes:
 | Value | Meaning
 
 | 0 | Not registered, not searching
-| 1 | **Registered (home)** ✅
+| 1 | **Registered (home)** 
 | 2 | Searching
 | 3 | Denied
-| 5 | **Registered (roaming)** ✅
+| 5 | **Registered (roaming)** 
 |===
 
 Example success:
@@ -116,7 +112,7 @@ Interpretation:
 | 20–30 | Good
 | 10–19 | Usable-ish
 | 0–9 | Very weak
-| 99 | **No signal / unknown** ⚠️
+| 99 | **No signal / unknown** 
 |===
 
 > For this project we only need **signal exists**, not quality.
@@ -166,60 +162,4 @@ We **do not** need:
 * Voice calls (ATD)
 * PPP / data session
 * SMS send loops
-
-Goal = **verify civilization heartbeat**, not use network.
-
-== Sentinel Logic
-
-=== Success Case (Network Alive)
-* `+CPIN: READY`
-* `+CREG` = 1 or 5
-
-OR (fallback)
-* `AT+COPS=?` returns operators
-
-=== High-Signal Danger Case
-* `AT` works (modem alive)
-* `CSQ = 99`
-* `CREG = 0 or 3`
-* `COPS=?` empty
-* **AND** SDR sees no GSM beacons
-
-→ **Cellular infrastructure silence** (rare event)
-
-== Example Test Script Skeleton (Pseudo-Shell)
-
-[source,bash]
-----
-echo "AT+CPIN?" > /dev/ttyUSB2
-sleep 1
-grep "READY" modem.log && echo "SIM OK"
-
-echo "AT+CREG?" > /dev/ttyUSB2
-sleep 1
-grep -E ": 0,[15]" modem.log && echo "NET OK"
-
-echo "AT+CSQ" > /dev/ttyUSB2
-sleep 1
-grep -v "99" modem.log && echo "RF SEEN"
-
-echo "AT+COPS=?" > /dev/ttyUSB2
-----
-
-> Adjust `/dev/ttyUSB2` as needed.  
-Use `stty -F /dev/ttyUSB2 115200` if required.
-
-== Notes
-
-* Pair modem test with SDR GSM beacon scan
-* No credit/SIM required to detect infrastructure
-* Seeing towers ≠ being allowed to attach
-
-== Philosophy
-
-> **Is the network dead, or just my subscription?**
-
-Civilization heartbeat ≠ “my SIM works.”  
-It = **infrastructure is transmitting**.
-
 
