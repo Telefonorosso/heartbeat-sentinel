@@ -1,8 +1,5 @@
 # heartbeat-sentinel
 A device that doesn't trust the internet to tell me the world is fine.
-# Civilization Heartbeat Sentinel
-
-> **Monitoring the continuity of civilization — one RF heartbeat at a time.**
 
 A Raspberry Pi + SDR system that monitors fundamental real-world signals
 to detect whether civilization is operating normally — *without relying on the internet as a single source of truth.*
