@@ -1,0 +1,86 @@
+= Civilization Heartbeat Sentinel — Signal Correlation Matrix
+:toc: macro
+:toclevels: 2
+:icons: unicode
+
+RF + infra physical-layer correlation reference table  
+Used to interpret simultaneous failures across independent domains.
+
+toc::[]
+
+== Multi-Signal Failure Correlation Matrix (Doomscore 0–5)
+
+Two indicators fail **at the same time** → consult value.  
+Diagonal "—" = same indicator.
+
+[cols="1,1,1,1,1,1,1,1,1,1,1",options="header"]
+|===
+| # | Internet | Power | Wi-Fi | FM | DVB-T | GSM-SDR | GSM-Attach | ADS-B | GNSS | APRS
+
+| *Internet* | — | 3 | 3 | 4 | 4 | 3 | 3 | 4 | 4 | 3
+| *Power* | 3 | — | 2 | 3 | 3 | 4 | 3 | 3 | 3 | 3
+| *Wi-Fi SSIDs* | 3 | 2 | — | 3 | 3 | 3 | 3 | 3 | 3 | 3
+| *FM Broadcast* | 4 | 3 | 3 | — | 2 | 4 | 4 | 4 | 4 | 4
+| *DVB-T* | 4 | 3 | 3 | 2 | — | 4 | 4 | 4 | 4 | 4
+| *GSM SDR* | 3 | 4 | 3 | 4 | 4 | — | 2 | 4 | 4 | 3
+| *GSM Attach* | 3 | 3 | 3 | 4 | 4 | 2 | — | 4 | 4 | 3
+| *ADS-B* | 4 | 3 | 3 | 4 | 4 | 4 | 4 | — | 4 | 4
+| *GNSS* | 4 | 3 | 3 | 4 | 4 | 4 | 4 | 4 | — | 4
+| *APRS / Ham* | 3 | 3 | 3 | 4 | 4 | 3 | 3 | 4 | 4 | —
+|===
+
+== Score Meaning
+
+[cols="1,4",options="header"]
+|===
+| Score | Interpretation
+| 0 | One signal normal → no concern
+| 1 | Weak anomaly, local noise likely
+| 2 | Same subsystem failure (broadcast / cellular) — probably local or maintenance
+| 3 | Possible regional infrastructure issue
+| 4 | Independent subsystems fail → **strong anomaly**
+| 5 | Extremely unlikely coincidence → **possible systemic collapse**
+|===
+
+> *Truth emerges from independent failures persisting over time.*
+
+== Indicator Legend
+
+[cols="1,3",options="header"]
+|===
+| Indicator | Meaning
+
+| Internet | DNS + multi-continent ping + backbone heartbeat
+| Power | Local AC sentinel / UPS shadow / loss inference
+| Wi-Fi SSIDs | Nearby access points vs local power
+| FM | FM broadcast carrier presence
+| DVB-T | Digital TV OFDM multiplex energy
+| GSM-SDR | SDR BCCH beacon scan
+| GSM-Attach | Modem network registration
+| ADS-B | Aircraft beacons
+| GNSS | GPS/GNSS lock or L1 RF carrier
+| APRS | Ham radio packet activity
+|===
+
+== Operational Logic
+
+* No single signal → **never** panic
+* Noise dies fast — **persistence matters**
+* Cross-domain failure = truth signal
+* Radio + space + aviation + internet down → **civilization heartbeat flatline**
+
+== Rule of Thumb
+
+[cols="2,3",options="header"]
+|===
+| Condition | Meaning
+
+| Few isolated 2-scores | Normal noise / local glitch
+| ≥3 events scoring ≥3 | Regional trouble
+| ≥2 events scoring ≥4 + persistence | Serious infra anomaly
+| ≥5 domains silent across radio + GNSS + ADS-B + Internet | **Critical: world heartbeat silent**
+|===
+
+== Motto
+
+> ***If the RF world goes silent, nothing else matters.***
