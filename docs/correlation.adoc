@@ -1,12 +1,8 @@
 = Civilization Heartbeat Sentinel — Signal Correlation Matrix
-:toc: macro
-:toclevels: 2
 :icons: unicode
 
 RF + infra physical-layer correlation reference table  
 Used to interpret simultaneous failures across independent domains.
-
-toc::[]
 
 == Multi-Signal Failure Correlation Matrix (Doomscore 0–5)
 
