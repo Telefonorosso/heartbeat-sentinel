@@ -1,12 +1,4 @@
-= Hardware Reuse and Low-Cost Device Notes
-
-This system is designed to operate using easily available and often repurposed equipment rather than specialized hardware. The intention is to keep the platform accessible, reproducible, and sustainable, and to demonstrate that infrastructure awareness does not require high-end radio gear.
-
-== Device Philosophy
-
-The sensing chain is based on practical constraints: many users already have some combination of old radios, modems, or embedded boards. Accepting modest hardware forces efficient methods and emphasizes signal presence over precision decoding.
-
-The objective is reliable detection of broadcast continuity, not laboratory-grade measurement.
+This system is designed to operate using easily available and often repurposed equipment rather than specialized hardware. The intention is to keep the platform accessible, reproducible; The objective is reliable detection of broadcast continuity, not laboratory-grade measurement.
 
 == Typical Reused Components
 
