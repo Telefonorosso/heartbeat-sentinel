@@ -87,3 +87,13 @@ this project is about **citizen resilience engineering**.
 ## License
 
 MIT — you control your tools.
+
+---
+
+### Civil Ethics Notice
+
+This project exists to promote **civil resilience, transparency and peace**.  
+Do not use it for fearmongering, coercion, surveillance, or harm.
+
+If you build, build for humanity.
+
