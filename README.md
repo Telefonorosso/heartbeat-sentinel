@@ -24,6 +24,10 @@ This project asks one simple question:
 
 > *"Is the world still running — or am I just offline?"*
 
+## Status
+
+`Work in progress — open build`
+
 ### Core Signals Monitored
 
 | Category | Indicator |
@@ -53,21 +57,6 @@ Amateur radio | APRS / ham packet presence |
 - `/data/` — (future) sample logs
 - `LICENSE` — open for community
 - This README — story + motivation + technical scope
-
-## Status
-
-`⚙️ Work in progress — open build`
-
-## Roadmap
-
-- [ ] Hardware bill of materials
-- [ ] Minimum sensor pipeline (FM / DVBT / ADS-B / power)
-- [ ] JSON telemetry format
-- [ ] State matrix & scoring engine (logic first)
-- [ ] Local UI dashboard
-- [ ] Sensor calibration logs
-- [ ] Publish Medium intro
-- [ ] Submit to Hackaday links
 
 ## Contributing
 
