@@ -63,7 +63,7 @@ EU: 144.800 MHz
 US: 144.390 MHz (adjust as needed)
 
 ```bash
-rtl_power -f 144.8M:144.8M:25k -i 3 -1 - \
+rtl_power -f 144.7M:144.9M:50k -i 3 -1 - \
 | awk -F, '{if ($6>-70) ok=1} END{print (ok?"APRS OK":"NO APRS")}'
 ```
 
