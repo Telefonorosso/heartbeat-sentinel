@@ -1,6 +1,6 @@
 # SDR Signal Check One-Liners
 
-This directory contains minimal RTL-SDR probes used to sense the physical RF world and determine whether critical broadcast / nav / air / cellular systems are alive.
+This document contains minimal RTL-SDR probes used to sense the physical RF world and determine whether critical broadcast / nav / air / cellular systems are alive.
 
 ---
 
