@@ -15,17 +15,17 @@ observability, correlation and conservative decision rules.
 == Detection Goals
 
 Detect anomalous GNSS behavior such as:
-* **sudden large simultaneous loss of satellites (jamming-like)
-* **abrupt position or time discontinuities (possible spoofing)
-* **unrealistically uniform SNR/Doppler patterns across PRNs (suspicious)
-* **RF energy rises around GNSS carriers without corresponding valid receiver telemetry
+* **sudden large simultaneous loss of satellites (jamming-like)**
+* **abrupt position or time discontinuities (possible spoofing)**
+* **unrealistically uniform SNR/Doppler patterns across PRNs (suspicious)**
+* **RF energy rises around GNSS carriers without corresponding valid receiver telemetry**
 
 Reliable detection aims to discriminate between:
-**receiver or antenna faults
-**local interference
-**propagation events (ionosphere)
-**intentional RF interference (jamming)
-**deliberate signal injection (spoofing)
+**receiver or antenna faults**
+**local interference**
+**propagation events (ionosphere)**
+**intentional RF interference (jamming)**
+**deliberate signal injection (spoofing)**
 
 == Why extra hardware matters
 
