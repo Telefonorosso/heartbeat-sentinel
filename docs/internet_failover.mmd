@@ -1,0 +1,47 @@
+flowchart TD
+
+    START([Periodic Check Start])
+
+    START --> PING[Intercontinental Ping Check]
+    PING -->|≥2 continents fail| ADD1[score += 1]
+    PING -->|OK| DNS[Global DNS Check]
+
+    ADD1 --> DNS
+
+    DNS -->|Major resolver or root fail| ADD2[score += 1]
+    DNS --> BGP[BGP Update Activity Check]
+
+    ADD2 --> BGP
+
+    BGP -->|Stale > threshold or anomalies| ADD3[score += 1]
+    BGP --> TOR[Tor Directory Fetch]
+
+    ADD3 --> TOR
+
+    TOR -->|Fail| ADD4[score += 1]
+    TOR --> BTC[Bitcoin Node Reachability]
+
+    ADD4 --> BTC
+
+    BTC -->|<2 nodes reachable| ADD5[score += 1]
+    BTC --> SCORECHECK{score >= threshold?}
+
+    ADD5 --> SCORECHECK
+
+    SCORECHECK -->|No| PRIMARY_RECOVERY[If on 3G & primary recovered -> revert]
+    SCORECHECK -->|Yes| ON3G{Currently on 3G?}
+
+    ON3G -->|Yes| CONTINUE3G[Stay on 3G<br/>Continue monitoring]
+    ON3G -->|No| TRY3G[Attempt 3G Failover]
+
+    TRY3G -->|Success| ACTIVATE3G[Switch to 3G<br/>Log + warn]
+    TRY3G -->|Fail| CRIT[Log + High Alert<br/>Suspected Global Disruption]
+
+    CONTINUE3G --> END([End Cycle])
+    ACTIVATE3G --> END
+    CRIT --> END
+
+    PRIMARY_RECOVERY -->|Recovered| REVERT[Revert to Primary<br/>Log]
+    PRIMARY_RECOVERY -->|Not yet| END
+
+    REVERT --> END
