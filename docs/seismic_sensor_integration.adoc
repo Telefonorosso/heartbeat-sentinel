@@ -30,7 +30,7 @@ https://github.com/sapienzaapps/galileo-terremoti
 
 * Use lightweight driver or library for I²C/SPI interface.  
 * Store a ring buffer of recent samples for post-event review.  
-* Event detection algorithmmight be STA/LTA or simple threshold+duration.  
+* Event detection algorithm might be STA/LTA or simple threshold+duration.  
 * Timing must align with system clock for correlation with other sensor failures.
 
 == Configuration & Thresholds
