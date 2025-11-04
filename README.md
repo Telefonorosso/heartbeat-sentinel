@@ -16,7 +16,7 @@ This project combines radio sensing, network heartbeat checks, independent infra
 Modern systems fail quietly.
 Networks hide outages behind cached UIs.
 Cloud services collapse silently.
-News can lie — physics can’t.
+News can lie, physics can’t.
 
 This project asks one simple question:
 
