@@ -48,14 +48,6 @@ Amateur radio | APRS / ham packet presence |
 - **Edge-resilient**: works in total internet outage
 - *Technological existentialism with engineering discipline*
 
-## Repository Contents
-
-- `/sensors/` — pseudocode for each signal module
-- `/docs/` — architecture diagrams & philosophy
-- `/data/` — (future) sample logs
-- `LICENSE` — open for community
-- This README — story + motivation + technical scope
-
 ## Contributing
 
 Ideas and data welcome —  
