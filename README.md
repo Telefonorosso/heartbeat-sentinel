@@ -3,10 +3,8 @@
 ![Build](https://img.shields.io/badge/build-WIP-lightgrey)
 ![Focus](https://img.shields.io/badge/focus-resilience-blue)
 ![Signals](https://img.shields.io/badge/signals-RF%2C%20GNSS%2C%20ADS--B%2C%20DVB--T%2C%20GSM-green)
-![Philosophy](https://img.shields.io/badge/philosophy-physics%20over%20feeds-purple)
 
 # heartbeat-sentinel
-A device that doesn't trust the internet to tell me the world is fine.
 
 A Raspberry Pi + SDR system that monitors fundamental real-world signals
 to detect whether civilization is operating normally — *without relying on the internet as a single source of truth.*
