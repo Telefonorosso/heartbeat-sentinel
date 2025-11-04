@@ -1,0 +1,96 @@
+= GNSS Spoofing & Jamming Detection — Defensive Notes
+:icons: unicode
+:toc:
+:toclevels: 2
+
+This document describes practical, defensive measures to detect GNSS spoofing and jamming
+from a sentinel perspective. It emphasises that reliable detection benefits from an
+additional, higher-quality piece of hardware (or multiple units) beyond a basic SDR + cheap GNSS receiver.
+
+toc::[]
+
+== Safety and Scope
+
+This document is strictly defensive. It does not describe, enable, or provide technical
+details for transmitting, spoofing, jamming, or otherwise interfering with GNSS systems.
+Implementers must follow local laws and regulations. The guidance below focuses on
+observability, correlation and conservative decision rules.
+
+== Detection Goals
+
+Detect anomalous GNSS behavior such as:
+* sudden large simultaneous loss of satellites (jamming-like)
+* abrupt position or time discontinuities (possible spoofing)
+* unrealistically uniform SNR/Doppler patterns across PRNs (suspicious)
+* RF energy rises around GNSS carriers without corresponding valid receiver telemetry
+
+Reliable detection aims to discriminate between:
+* receiver or antenna faults
+* local interference
+* propagation events (ionosphere)
+* intentional RF interference (jamming)
+* deliberate signal injection (spoofing)
+
+== Why extra hardware matters
+
+A basic RTL-SDR and a consumer GNSS module provide limited signals:
+* SDR → coarse RF energy in L-band (good for loud, wideband jammers)
+* consumer GNSS → fix/no-fix, satellite count, coarse SNR (useful but limited)
+
+Robust detection benefits from one or more of the following less-common items:
+
+* **Full-feature GNSS receiver with raw observables** — provides per-PRN carrier-phase, pseudorange, C/N₀ and Doppler. Raw observables are essential to detect subtle anomalies (e.g., inconsistent Doppler or phase behavior).
+* **Second independent GNSS receiver (spatial separation)** — two colocated or slightly separated receivers provide cross-checks: consistent time/position but divergent observables indicate a receiver fault vs. true external event.
+* **Multi-antenna array / direction-finding capability** — enables measuring angle-of-arrival changes; spoofers typically appear from one direction compared to many satellite directions.
+* **Spectrum analyzer or high-dynamic-range SDR** — captures full-band IQ with better linearity and dynamic range than entry-level dongles, improving detection of narrowband or near-field interferers.
+* **Stable reference clock ( disciplined oscillator )** — helps detect sudden time changes and reduces false positives from receiver clock issues.
+
+These items increase cost/complexity but significantly improve detection fidelity.
+
+== Defensive signals and heuristics (conceptual)
+
+Monitor and correlate:
+* RF-band energy around L1/L2 (SDR or spectrum analyzer)
+* GNSS receiver telemetry: fix status, per-PRN SNR/C/N0, Doppler estimates, position/time residuals
+* Persistence over time (require anomalies across multiple windows)
+* Cross-domain corroboration (ADS-B, FM, GSM, power state) — intentional interference often correlates with other local anomalies
+
+Conservative rule examples (concept, not exploit steps):
+* Wideband L1 power rise + simultaneous drop in satellite count and SNR → high confidence jamming indicator.
+* Position/time jumps with PRN Doppler inconsistencies and uniform SNR across PRNs → elevated spoofing suspicion.
+* Loss of fix without L1 power rise → likely receiver/antenna local fault.
+
+Insist on repeat observations (e.g., 2–3 windows) before raising high-severity alerts.
+
+== Logging and forensics
+
+When an event is suspected, capture:
+* recent GNSS raw observables (if available) or at least PRN/SNR/Doppler lists
+* SDR short IQ dump (few seconds) around suspected time
+* correlated sensor data (ADS-B counts, FM/DVB-T status, power sentinel, accelerometer)
+* timestamps synchronized to system UTC
+
+Preserve files for offline forensic analysis. Do not attempt active probing or countermeasures.
+
+== Operational recommendations
+
+* Calibrate baselines for satellite count, C/N₀ and SDR noise floor over several days.
+* Implement hysteresis and sliding-window confirmation to reduce false positives.
+* Prefer detection policies that require multi-domain corroboration.
+* Maintain a sensor-health monitor to differentiate sensor faults from external events.
+* If deploying a second GNSS receiver, ensure independent supply and antenna placement to reduce common-mode local interference.
+
+== Privacy, legality and ethics
+
+* Do not attempt to test detection by transmitting or otherwise interfering with GNSS.
+* Follow country-specific regulations on RF emissions and spectrum.
+* Limit captured raw data sharing to necessary forensic teams; treat GPS/IQ dumps as potentially sensitive.
+
+== Summary
+
+Detecting GNSS spoofing/jamming reliably is feasible with a defensive architecture that:
+* combines SDR and a proper GNSS receiver,
+* uses additional higher-quality hardware (raw-observable GNSS receiver, second receiver or DF capability) when possible,
+* emphasizes persistence, cross-domain corroboration, and logging for forensics.
+
+This design minimizes false alarms while providing actionable evidence for operators.
