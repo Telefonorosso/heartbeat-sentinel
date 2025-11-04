@@ -1,13 +1,9 @@
 = GNSS Spoofing & Jamming Detection — Defensive Notes
 :icons: unicode
-:toc:
-:toclevels: 2
 
 This document describes practical, defensive measures to detect GNSS spoofing and jamming
 from a sentinel perspective. It emphasises that reliable detection benefits from an
 additional, higher-quality piece of hardware (or multiple units) beyond a basic SDR + cheap GNSS receiver.
-
-toc::[]
 
 == Safety and Scope
 
