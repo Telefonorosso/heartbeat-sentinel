@@ -1,4 +1,4 @@
-= Seismic Sensor Integration (Accelerometer + GNSS Hybrid)
+= Seismic Sensor Integration
 
 This note describes how to add a **seismic sensing node** to the sentinel platform by integrating a low-cost accelerometer (and optionally GNSS displacement measurement), referencing the architecture of the Galileo-Terremoti project.
 https://github.com/sapienzaapps/galileo-terremoti  
