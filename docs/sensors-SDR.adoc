@@ -43,8 +43,9 @@ rtl_power -f 1805M:1880M:200k -i 2 -1 - \
 Not decoding — just checking the RF noise floor bump.
 
 ```bash
-rtl_power -f 1090M:1090M:50k -i 2 -1 - \
+rtl_power -f 1089M:1091M:50k -i 2 -1 - \
 | awk -F, '{if ($6>-70) ok=1} END{print (ok?"ADS-B RF OK":"NO ADS-B RF")}'
+
 ```
 
 ## GPS L1 Carrier (≈1575.42 MHz)
