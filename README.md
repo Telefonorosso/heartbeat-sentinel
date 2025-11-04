@@ -7,9 +7,9 @@
 # heartbeat-sentinel
 
 A Raspberry Pi + SDR system that monitors fundamental real-world signals
-to detect whether civilization is operating normally — *without relying on the internet as a single source of truth.*
+to detect whether civilization is operating normally without relying on the internet as a single source of truth.
 
-This project combines radio sensing, network heartbeat checks, independent infrastructure signals, and logic/anomaly analysis to build a **physical-layer uptime monitor for society**.
+This project combines radio sensing, network heartbeat checks, independent infrastructure signals, and logic/anomaly analysis to build a doomsday detector.
 
 ### Why?
 
