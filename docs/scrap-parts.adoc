@@ -1,3 +1,5 @@
+= Hardware Reuse and Low-Cost Devices
+
 This system is designed to operate using easily available and often repurposed equipment rather than specialized hardware. The intention is to keep the platform accessible & reproducible; The objective is reliable detection of broadcast continuity, not laboratory-grade measurement.
 
 == Typical Reused Components
