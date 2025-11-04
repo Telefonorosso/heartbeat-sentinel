@@ -1,0 +1,57 @@
+= Seismic Sensor Integration (Accelerometer + GNSS Hybrid)
+
+This note describes how to add a **seismic sensing node** to the sentinel platform by integrating a low-cost accelerometer (and optionally GNSS displacement measurement), referencing the architecture of the Galileo-Terremoti project.
+https://github.com/sapienzaapps/galileo-terremoti  
+
+== Objectives
+
+* Detect abrupt ground vibration using an accelerometer sensor.
+* Correlate vibration events with radio/infrastructure anomalies.
+* Use seismic input as contextual signal in the overall continuity monitoring system.
+
+== Required Hardware
+
+* A 3-axis accelerometer on a microcontroller or single-board computer (e.g., ADXL345, MPU-6050)  
+* Raspberry Pi (or equivalent SBC) for local processing  
+* Stable mounting to a fixed structure (wall, shelf)  
+* Optional: GNSS module for displacement monitoring
+
+== Integration Flow
+
+1. Initialize accelerometer sensor, calibrate bias and offsets.  
+2. Continuously sample sensor at defined rate (e.g., 50–200 Hz).  
+3. Apply real-time filter to suppress normal/environmental vibrations (e.g., vehicle, HVAC).  
+4. Detect “shake event” when acceleration norms exceed local threshold for defined period.  
+5. On event detection: annotate system log with timestamp, amplitude, duration.  
+6. Feed this event into the scoring engine alongside RF/infra signals.  
+7. Use as cross-domain indicator: if infrastructure anomaly coincides with seismic event → mark as “likely natural disturbance”.
+
+== Software Considerations
+
+* Use lightweight driver or library for I²C/SPI interface.  
+* Store a ring buffer of recent samples for post-event review.  
+* Event detection algorithmmight be STA/LTA or simple threshold+duration.  
+* Timing must align with system clock for correlation with other sensor failures.
+
+== Configuration & Thresholds
+
+* Define baseline noise level (e.g., accelerometer RMS during quiet period).  
+* Trigger threshold = baseline mean + N×standard_deviation (e.g., N=5).  
+* Minimum event duration = e.g., 100ms.  
+* Optional debounce time to avoid repeated triggers.  
+* Periodic self-check: verify sensor still reporting, bias not drifting.
+
+== Data Integration
+
+* Annotated output: JSON record `{ "event_type": "seismic", "timestamp": "...", "peak_acc": ..., "duration_ms": ..., "sensor_id": "..."}`
+* Scoring engine reads this input as one of many domain indicators.
+
+== Failure & False-Positive Handling
+
+* Mounting movement, heavy machinery, hammering are non-seismic triggers.  
+* Do not treat accelerometer event alone as alert — only in cross-domain context.  
+* Sensor failure: if no data for defined period → log “sensor offline” but do not escalate.
+
+== Summary
+
+By integrating an accelerometer (and optionally GNSS) you add a physical-vibration domain to the sentinel system. This enhances correlation possibilities without increasing reliance on external networks or services.
