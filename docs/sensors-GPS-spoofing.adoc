@@ -1,4 +1,4 @@
-= GNSS Spoofing & Jamming Detection — Defensive Notes
+= GNSS Spoofing & Jamming Detection
 :icons: unicode
 
 This document describes practical, defensive measures to detect GNSS spoofing and jamming
