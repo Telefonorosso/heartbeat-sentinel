@@ -42,6 +42,48 @@ Offline inference only.
 No external network calls.  
 Sandboxed execution.
 
-== Summary
+== Architecture
 
-This module is an optional analytical layer. Its value is improved interpretation and operator clarity. Core sensing, scoring, and alert logic remain fully rule-based and independent.
+[mermaid]
+----
+graph TD
+    A[Raspberry Pi / Sensor Nodes] -->|Telemetry via UDP/MQTT| B[Central AI Node]
+    B -->|Model Inference & Correlation| C[Anomaly Reports / Event Summaries]
+    C --> D[Distributed Storage or Cloud Sync (optional)]
+----
+
+Each Pi node continuously streams network and environmental telemetry (latency, DNS/BGP status, sensor data) to the central AI node.  
+The AI node processes the incoming streams using local inference models and feeds summarized results back into the Doomsday monitoring framework.
+
+== Software Stack
+
+The AI node runs a lightweight inference server based on **LLaMA-compatible architectures**, deployed via `llama.cpp` or `text-generation-webui` with quantized models (3B–7B).  
+This environment supports:
+
+* **Temporal correlation analysis** between network anomalies and physical sensor events.  
+* **Context-aware classification** of incident types.  
+* **Generation of natural-language diagnostic summaries** for human review or logging.
+
+The operating system is typically a **Linux workstation** or **mini PC** running a dedicated container (e.g., Docker or Podman) for model execution and data ingestion.
+
+== Hardware Requirements
+
+Typical reference setup:
+
+* CPU: x86_64, 8 cores or higher  
+* RAM: 32 GB minimum (recommended 64 GB)  
+* Storage: 512 GB SSD  
+* GPU (optional): NVIDIA GTX/RTX with 6 GB+ VRAM, or integrated inference via CPU quantization  
+
+This node acts as the **intelligent hub** of the Doomsday network, capable of performing real-time reasoning and model updates while remaining fully autonomous from cloud services.
+
+== Integration Purpose
+
+The dedicated AI node allows the system to perform:
+
+* **Cross-node event correlation** — identifying patterns among geographically distributed sentinels.  
+* **Anomaly classification and ranking** — distinguishing routine instability from exceptional events.  
+* **Predictive modeling** — inferring potential large-scale outages before full propagation.  
+
+By isolating AI computation on a powerful but local PC, Doomsday maintains its distributed, low-power sensor architecture while gaining advanced analytical capability.  
+The result is a hybrid system — lightweight at the edge, intelligent at the core — capable of understanding not only that the network is failing, but also *why*. This module is an optional analytical layer. Its value is improved interpretation and operator clarity. Core sensing, scoring, and alert logic remain fully rule-based and independent.
