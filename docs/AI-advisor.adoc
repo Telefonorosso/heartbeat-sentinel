@@ -1,5 +1,6 @@
 = Local AI Component
 :icons: unicode
+:imagesdir: ./images
 
 == Purpose
 
@@ -44,13 +45,8 @@ Sandboxed execution.
 
 == Architecture
 
-[mermaid]
-----
-graph TD
-    A[Raspberry Pi / Sensor Nodes] -->|Telemetry via UDP/MQTT| B[Central AI Node]
-    B -->|Model Inference & Correlation| C[Anomaly Reports / Event Summaries]
-    C --> D[Distributed Storage or Cloud Sync (optional)]
-----
+.Central AI Node Data Flow
+image::ai_architecture.png[Central AI Node Architecture, width=640, align=center]
 
 Each Pi node continuously streams network and environmental telemetry (latency, DNS/BGP status, sensor data) to the central AI node.  
 The AI node processes the incoming streams using local inference models and feeds summarized results back into the Doomsday monitoring framework.
