@@ -51,7 +51,37 @@ The received data can then be:
 * Add encrypted and authenticated UDP transmission.  
 * Enable alert triggers on anomalous readings (e.g., vibrations during a global disconnection).
 
-== Conclusion
+= Potential Use Cases for Sensor Stream within the Doomsday Project
 
-Repurposing smartphones as sensors perfectly fits the *Doomsday* philosophy — resilience, decentralization, and intelligent reuse of existing resources.  
-Each old phone can become a small sensory node, helping make the network sentinel more sensitive, distributed, and sustainable.
+== Environmental and Physical Layer Monitoring
+
+* **Vibration and seismic detection:**  
+  Multiple repurposed smartphones positioned in different locations can record subtle ground vibrations.  
+  Correlating these signals with network anomalies may reveal regional blackouts, infrastructure failures, or even earthquakes.
+
+* **Electromagnetic disturbance sensing:**  
+  The magnetometer readings can identify strong EM interference. In a distributed configuration, synchronized magnetometer data from multiple smartphones could effectively separate local noise from coherent geomagnetic variations, enabling the detection of solar-induced disturbances.
+
+== Redundancy and Failure Analysis
+
+* **Physical confirmation of digital anomalies:**  
+  When a regional internet drop is detected, correlated accelerometer or magnetic anomalies from smartphones could confirm if it’s caused by physical events.
+
+* **Fallback telemetry nodes:**  
+  A smartphone can act as an emergency node — if the Raspberry Pi loses power or connectivity, the phone’s mobile data (4G/5G) could transmit minimal diagnostic data back to the central Doomsday network.
+
+== Experimental and Research Applications
+
+* **GPS signal stability tracking:**  
+  Smartphones equipped with GPS can continuously record signal strength and compare it with expected satellite visibility, helping detect local *GPS jamming* or spoofing attempts.
+
+* **Temperature and ambient light as proxy signals:**  
+  Variations in temperature or light can provide context to external conditions — day/night cycles, heatwaves, or storms — potentially influencing network load or reliability.
+
+* **Distributed synchronization experiments:**  
+  Using the system clock and periodic sensor events, Sensor Stream nodes can test local synchronization accuracy compared to NTP, exploring how time drifts propagate under outage conditions.
+
+== Summary
+
+Repurposed Sensor Stream devices add a valuable physical sensing layer to the Doomsday network.  
+They allow the system not only to *detect* digital anomalies, but to *interpret* them in the context of real-world events — making Doomsday an increasingly complete sentinel of both the network and its surrounding environment.
