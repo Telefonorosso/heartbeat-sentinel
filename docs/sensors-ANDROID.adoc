@@ -1,11 +1,11 @@
 = Reusing Smartphones as Sensors
 :revdate: 2025-11-05
 :doctype: article
-:toc: left
-:icons: font
 
 == Introduction
 Using the Android application *Sensor Stream*, old smartphones can be repurposed as low-cost sensor modules. These devices are capable of transmitting real-time readings from their internal sensors (accelerometer, magnetometer, gyroscope, light, proximity, etc.) to a Raspberry Pi node via UDP.
+
+https://github.com/priyankark/SensorStreamServer
 
 == Architecture
 [mermaid]
