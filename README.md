@@ -26,6 +26,8 @@ This project asks one simple question:
 
 Work in progress — open build
 
+# https://github.com/Telefonorosso/heartbeat-sentinel/tree/main/docs
+
 ### Core Signals Monitored
 
 | Category | Indicator |
