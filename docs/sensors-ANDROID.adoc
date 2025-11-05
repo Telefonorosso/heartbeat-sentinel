@@ -79,9 +79,7 @@ The received data can then be:
 * Add encrypted and authenticated UDP transmission.  
 * Enable alert triggers on anomalous readings (e.g., vibrations during a global disconnection).
 
-= Potential Use Cases for Sensor Stream within the Doomsday Project
-
-== Environmental and Physical Layer Monitoring
+== Use cases: environmental and Physical Layer Monitoring
 
 * **Vibration and seismic detection:**  
   Multiple repurposed smartphones positioned in different locations can record subtle ground vibrations.  
