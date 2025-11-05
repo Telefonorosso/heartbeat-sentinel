@@ -42,17 +42,11 @@ Offline inference only.
 No external network calls.  
 Sandboxed execution.
 
-== Architecture
-
-.Central AI Node Data Flow
-image::ai-arch.png[Central AI Node Architecture, width=640, align=center]
+== Architecture and Software Stack
 
 Each Pi node continuously streams network and environmental telemetry (latency, DNS/BGP status, sensor data) to the central AI node.  
 The AI node processes the incoming streams using local inference models and feeds summarized results back into the Doomsday monitoring framework.
-
-== Software Stack
-
-The AI node runs a lightweight inference server based on **LLaMA-compatible architectures**, deployed via `llama.cpp` or `text-generation-webui` with quantized models (3B–7B).  
+It runs a lightweight inference server based on **LLaMA-compatible architectures**, deployed via `llama.cpp` or `text-generation-webui` with quantized models (3B–7B).  
 This environment supports:
 
 * **Temporal correlation analysis** between network anomalies and physical sensor events.  
