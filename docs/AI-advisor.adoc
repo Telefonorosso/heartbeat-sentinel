@@ -74,5 +74,7 @@ The dedicated AI node allows the system to perform:
 * **Anomaly classification and ranking** — distinguishing routine instability from exceptional events.  
 * **Predictive modeling** — inferring potential large-scale outages before full propagation.  
 
+== Summary
+
 By isolating AI computation on a powerful but local PC, Doomsday maintains its distributed, low-power sensor architecture while gaining advanced analytical capability.  
 The result is a hybrid system — lightweight at the edge, intelligent at the core — capable of understanding not only that the network is failing, but also *why*. This module is an optional analytical layer. Its value is improved interpretation and operator clarity. Core sensing, scoring, and alert logic remain fully rule-based and independent.
