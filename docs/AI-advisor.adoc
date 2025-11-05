@@ -1,6 +1,6 @@
 = Local AI Component
 :icons: unicode
-:imagesdir: ./images
+:imagesdir: ./docs
 
 == Purpose
 
