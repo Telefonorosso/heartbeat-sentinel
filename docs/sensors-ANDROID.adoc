@@ -3,21 +3,11 @@
 :doctype: article
 
 == Introduction
-Using the Android application *Sensor Stream*, old smartphones can be repurposed as low-cost sensor modules. These devices are capable of transmitting real-time readings from their internal sensors (accelerometer, magnetometer, gyroscope, light, proximity, etc.) to a Raspberry Pi node via UDP.
+Using the Android application *Sensor Stream*, old smartphones can be repurposed as no-cost sensor modules. These devices are capable of transmitting real-time readings from their internal sensors (accelerometer, magnetometer, gyroscope, light, proximity, etc.) to a Raspberry Pi node via UDP.
 
 https://github.com/priyankark/SensorStreamServer
 
-== Architecture
-[mermaid]
-----
-graph TD
-    A[Android smartphone with Sensor Stream] -->|UDP broadcast| B[Raspberry Pi - Doomsday Node]
-    B --> C[Sensor data acquisition module]
-    C --> D[Local storage / real-time analysis]
-    D --> E[Doomsday global monitoring network]
-----
-
-The app performs a UDP broadcast on the local network (typically on a configurable port, default 5555).  
+The app performs a UDP broadcast on the local network (typically on a configurable port, default 5000).  
 The Raspberry Pi listens on this port, processes incoming packets, and integrates the data stream into the global Doomsday telemetry flow.
 
 == Motivation and Advantages
