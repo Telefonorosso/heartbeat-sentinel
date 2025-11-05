@@ -63,6 +63,7 @@ async def echo(websocket, path):
             f = open("accelerometer.txt", "a")
             f.write(data+"\n")
 
+....etc...
 ----
 
 The received data can then be:
