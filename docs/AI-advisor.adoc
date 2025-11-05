@@ -46,7 +46,7 @@ Sandboxed execution.
 == Architecture
 
 .Central AI Node Data Flow
-image::ai_architecture.png[Central AI Node Architecture, width=640, align=center]
+image::ai-arch.png[Central AI Node Architecture, width=640, align=center]
 
 Each Pi node continuously streams network and environmental telemetry (latency, DNS/BGP status, sensor data) to the central AI node.  
 The AI node processes the incoming streams using local inference models and feeds summarized results back into the Doomsday monitoring framework.
