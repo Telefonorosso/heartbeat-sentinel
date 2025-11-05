@@ -24,18 +24,46 @@ A minimal Python example:
 
 [source,python]
 ----
+#!/usr/bin/env python
+
+import asyncio
+import websockets
 import socket
+from base64 import b64decode
+import wave
+import json
 
-UDP_IP = "0.0.0.0"
-UDP_PORT = 5555
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind((UDP_IP, UDP_PORT))
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except Exception:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
 
-print("Listening on", UDP_PORT)
-while True:
-    data, addr = sock.recvfrom(1024)
-    print("Message from", addr, ":", data.decode())
+
+hostname = socket.gethostname()
+IPAddr = get_ip()
+# Using 5000 as the default port but you can change based on your requirements
+port = 5000
+print("Your Computer Name is: " + hostname)
+print("Your Computer IP Address is: " + IPAddr)
+print(
+    "* Enter {0}:{1} in the app.\n* Press the 'Set IP Address' button.\n* Select the sensors to stream.\n* Update the 'update interval' by entering a value in ms.".format(IPAddr, $
+
+
+async def echo(websocket, path):
+    async for message in websocket:
+        if path == '/accelerometer':
+            data = await websocket.recv()
+            print(data)
+            f = open("accelerometer.txt", "a")
+            f.write(data+"\n")
+
 ----
 
 The received data can then be:
