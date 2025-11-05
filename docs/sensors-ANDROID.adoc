@@ -19,8 +19,7 @@ The Raspberry Pi listens on this port, processes incoming packets, and integrate
 
 == Software Integration
 
-The Raspberry Pi runs a lightweight UDP listener that receives raw data from *Sensor Stream*.  
-A minimal Python example:
+The Raspberry Pi runs a lightweight WS listener that receives raw data from *Sensor Stream*:
 
 [source,python]
 ----
