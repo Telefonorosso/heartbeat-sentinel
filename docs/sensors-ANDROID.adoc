@@ -1,0 +1,67 @@
+= Reusing Smartphones as Sensors
+:revdate: 2025-11-05
+:doctype: article
+:toc: left
+:icons: font
+
+== Introduction
+Using the Android application *Sensor Stream*, old smartphones can be repurposed as low-cost sensor modules. These devices are capable of transmitting real-time readings from their internal sensors (accelerometer, magnetometer, gyroscope, light, proximity, etc.) to a Raspberry Pi node via UDP.
+
+== Architecture
+[mermaid]
+----
+graph TD
+    A[Android smartphone with Sensor Stream] -->|UDP broadcast| B[Raspberry Pi - Doomsday Node]
+    B --> C[Sensor data acquisition module]
+    C --> D[Local storage / real-time analysis]
+    D --> E[Doomsday global monitoring network]
+----
+
+The app performs a UDP broadcast on the local network (typically on a configurable port, default 5555).  
+The Raspberry Pi listens on this port, processes incoming packets, and integrates the data stream into the global Doomsday telemetry flow.
+
+== Motivation and Advantages
+
+* **Hardware reuse:** extends the lifespan of obsolete but functional devices, reducing waste and costs.  
+* **High sensor density:** smartphones integrate multiple precision sensors in a compact form factor.  
+* **Scalability and modularity:** additional units can be easily added without structural changes.  
+* **Autonomy:** internal batteries allow continued sensing even during local power outages.
+
+== Software Integration
+
+The Raspberry Pi runs a lightweight UDP listener that receives raw data from *Sensor Stream*.  
+A minimal Python example:
+
+[source,python]
+----
+import socket
+
+UDP_IP = "0.0.0.0"
+UDP_PORT = 5555
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((UDP_IP, UDP_PORT))
+
+print("Listening on", UDP_PORT)
+while True:
+    data, addr = sock.recvfrom(1024)
+    print("Message from", addr, ":", data.decode())
+----
+
+The received data can then be:
+
+* logged into a CSV file or local database;  
+* used as input for vibration, seismic, or electromagnetic disturbance detection;  
+* correlated with network telemetry to identify compound events (e.g., power loss + connectivity drop).
+
+== Future Extensions
+
+* Implement dedicated parsers for each sensor type.  
+* Aggregate sensor data into a shared web dashboard.  
+* Add encrypted and authenticated UDP transmission.  
+* Enable alert triggers on anomalous readings (e.g., vibrations during a global disconnection).
+
+== Conclusion
+
+Repurposing smartphones as sensors perfectly fits the *Doomsday* philosophy — resilience, decentralization, and intelligent reuse of existing resources.  
+Each old phone can become a small sensory node, helping make the network sentinel more sensitive, distributed, and sustainable.
