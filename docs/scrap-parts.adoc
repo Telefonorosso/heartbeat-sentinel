@@ -7,8 +7,11 @@ This system is designed to operate using easily available and often repurposed e
 *RTL-SDR dongle (entry-level)*  
 Common DVB-T SDR receivers detect carriers and noise floors sufficiently for broadcast checks (FM, DVB-T, GSM beacon presence, ADS-B noise). Sensitivity is lower than professional hardware but adequate for threshold-based continuity sensing.
 
-*Legacy USB cellular modem*  
+*Legacy USB HSPA modem*  
 Older 3G/2G USB sticks (e.g., early Vodafone or Huawei models) still respond to standard AT commands. Even without an active SIM, they can confirm network visibility, registration attempts, and signal presence.
+
+*Obsolete phone*
+Repurposing a retired smartphone as a Sensor Stream node transforms e-waste into a powerful, super-dense and accurate remote sensor.
 
 *Obsolete Wi-Fi extender or access point*  
 Used as a passive indicator of local power state. If the extender disappears from scans while external SSIDs remain, the system can infer a localized outage rather than a wide-area event.
